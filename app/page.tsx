@@ -85,10 +85,20 @@ export default function ChatInterface() {
     const selectedFile = e.target.files?.[0];
     if (!selectedFile) return;
 
-    if (selectedFile.type !== "application/pdf") {
-      alert("Please select a valid PDF file.");
+    const supportedTypes = [
+      "application/pdf",
+      "text/csv",
+      "image/png",
+      "image/jpeg",
+      "image/bmp",
+      "image/tiff",
+    ];
+
+    if (!supportedTypes.includes(selectedFile.type)) {
+      alert("Please select a supported file (PDF, CSV, PNG, JPG, BMP, TIFF).");
       return;
     }
+
     setFile(selectedFile);
   };
 
@@ -275,15 +285,15 @@ export default function ChatInterface() {
               <input
                 ref={fileInputRef}
                 type="file"
-                accept=".pdf"
+                accept=".pdf,.csv,.png,.jpg,.jpeg,.bmp,.tiff"
                 onChange={handleFileSelect}
                 className="hidden"
-                id="pdf-upload"
+                id="file-upload"
                 disabled={isUploading}
               />
 
               <label
-                htmlFor="pdf-upload"
+                htmlFor="file-upload"
                 className="upload-label flex-1 flex items-center gap-3 p-3 rounded-xl cursor-pointer transition-all duration-200"
               >
                 <div className="upload-icon flex items-center justify-center w-8 h-8 rounded-lg">
@@ -294,7 +304,7 @@ export default function ChatInterface() {
                     className="text-sm font-medium m-0 truncate"
                     style={{ color: "var(--text-primary)" }}
                   >
-                    {file ? file.name : "Choose PDF file"}
+                    {file ? file.name : "Choose a file (PDF, CSV, Image)"}
                   </h3>
                   <p
                     className="text-xs m-0 truncate"

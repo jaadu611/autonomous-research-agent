@@ -20,11 +20,11 @@ export async function POST(req: NextRequest) {
       messages: [
         {
           role: "system",
-          content: `You are a helpful research assistant. Answer the question based on the PDF content.
-Provide your answer in this exact format:
-
-Answer: <your answer>
-Source: <copy the exact snippet(s) from the PDF that support your answer, do NOT just give line numbers>`,
+          content: `You are a helpful research assistant. Answer the question based on the PDF, IMAGE, CSV content.
+          Provide your answer in this exact format:
+          
+          Answer: <your answer>
+          Source: <copy the exact snippet(s) from the PDF that support your answer, do NOT just give line numbers>`,
         },
         {
           role: "user",
