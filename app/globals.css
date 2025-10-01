@@ -1,26 +1,208 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* CSS Variables for theming */
+html[data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f1f5f9;
+  --bg-accent: #3b82f6;
+  --bg-accent-hover: #2563eb;
+  --bg-success: #10b981;
+  --bg-danger: #ef4444;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  --text-inverse: #ffffff;
+  --border-primary: #e2e8f0;
+  --border-secondary: #cbd5e1;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html[data-theme="dark"] {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
+  --bg-accent: #3b82f6;
+  --bg-accent-hover: #2563eb;
+  --bg-success: #10b981;
+  --bg-danger: #ef4444;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-inverse: #ffffff;
+  --border-primary: #334155;
+  --border-secondary: #475569;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* App container */
+.app-container {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Header and branding */
+.brand-icon {
+  background: var(--bg-accent);
+  color: var(--text-inverse);
+}
+
+.theme-toggle {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  color: var(--text-secondary);
+}
+.theme-toggle:hover {
+  background: var(--bg-accent);
+  color: var(--text-inverse);
+}
+
+.header {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  color: var(--text-secondary);
+}
+
+/* Upload section */
+.upload-section {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-top: 0;
+}
+.file-ready {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid var(--bg-success);
+}
+.file-icon.success {
+  background: var(--bg-success);
+  color: var(--text-inverse);
+}
+.remove-btn {
+  color: var(--bg-danger);
+}
+.remove-btn:hover {
+  background: rgba(239, 68, 68, 0.1);
+}
+.upload-label {
+  border: 2px dashed var(--border-secondary);
+}
+.upload-label:hover {
+  border-color: var(--bg-accent);
+  background: rgba(59, 130, 246, 0.05);
+}
+.upload-icon {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--bg-accent);
+}
+.upload-btn {
+  background: var(--bg-accent);
+  color: var(--text-inverse);
+}
+.upload-btn:hover:not(:disabled) {
+  background: var(--bg-accent-hover);
+}
+
+/* Chat area */
+.chat-area {
+  background: var(--bg-primary);
+}
+
+/* Empty state */
+.empty-icon {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--bg-accent);
+}
+
+/* Messages */
+.message.user .message-avatar {
+  background: var(--bg-accent);
+  color: var(--text-inverse);
+}
+.message.assistant .message-avatar {
+  background: var(--bg-accent-hover);
+  color: var(--text-inverse);
+}
+
+/* Chat bubbles */
+.message.user .message-bubble {
+  background: var(--bg-secondary);
+  color: var(--text-inverse);
+  border-radius: 1rem 0.75rem 0.75rem 1rem;
+}
+
+.message.assistant .message-bubble {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-primary) !important;
+  border-radius: 1rem 1rem 1rem 0.25rem;
+}
+
+/* Input section */
+.input-section {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+}
+
+.message-input {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  color: var(--text-primary);
+}
+.message-input:focus {
+  border-color: var(--bg-accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+.message-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Send button */
+.send-btn {
+  background: var(--bg-accent);
+  color: var(--text-inverse);
+}
+.send-btn:hover:not(:disabled) {
+  background: var(--bg-accent-hover);
+}
+
+/* Typing indicator */
+.typing-indicator span {
+  background: var(--text-secondary);
+  animation: bounce 1.4s infinite ease-in-out;
+}
+.typing-indicator span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+.typing-indicator span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+@keyframes bounce {
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
   }
 }
+.loading-text {
+  color: var(--text-secondary);
+}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Scrollbar */
+.messages-container::-webkit-scrollbar {
+  width: 6px;
+}
+.messages-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+.messages-container::-webkit-scrollbar-thumb {
+  background: var(--border-secondary);
+  border-radius: 3px;
+}
+.messages-container::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+::-webkit-scrollbar {
+  display: none;
 }
